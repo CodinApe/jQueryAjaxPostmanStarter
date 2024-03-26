@@ -8,6 +8,52 @@
 // global variable to store our returned data - we'll reduce the calls made to the server with this
 let cupcakesCollection = null;
 
+
+// Call from postman
+let settings = {
+  "url": "https://6f186305-ab26-4839-b806-380e3560e049.mock.pstmn.io/cupcakes.json",
+  "method": "GET",
+  "timeout": 0,
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  displayCupcakes(response);
+  // save in global variable
+  cupcakesCollection = response;
+});
+
+
+$("#alpha").on("click", function(){
+  if (cupcakesCollection[0].name == "Bubble Gum Pop"){
+    return;
+  } else {
+    let backwardsCollection = cupcakesCollection;
+    backwardsCollection = backwardsCollection.reverse();
+    displayCupcakes(backwardsCollection);
+  }
+});
+
+$("#zed").on("click", function(){
+  if (cupcakesCollection[0].name == "Bubble Gum Pop"){
+    let backwardsCollection = cupcakesCollection;
+    backwardsCollection = backwardsCollection.reverse();
+    displayCupcakes(backwardsCollection);
+  } else {
+    return;
+  }
+})
+
+
+//get syntax
+// $.get("https://6f186305-ab26-4839-b806-380e3560e049.mock.pstmn.io/cupcakes.json", function(response) {
+//   console.log(response);
+//   displayCupcakes(response);
+//   // save in global variable
+//   cupcakesCollection = response;
+// }, 'json');
+
+
 // use get to grab and display the cupcakes in their default order (this endpoint should return all of the cupcakes in  JSON in alphabetical order])
 //TODO
 
